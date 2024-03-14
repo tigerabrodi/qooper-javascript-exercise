@@ -93,9 +93,9 @@ The efficient solution is to use a Set.
 
 A Set is a collection of unique values where the lookup of a value is `O(1)` aka constant time. Looking up a value in a Set is very fast and won't affect the runtime complexity of the solution no matter how large the Set is.
 
-We can use a Set to store all the unique characters in the string. Then, we can iterate through the string again and check if the character exists in both lowercase and uppercase. If it does, we compare it with the current largest character and update it if it's larger or if it's the first character found.
+We can use a Set to store all the unique characters in the string. **Then, we can iterate through the string again and check if the character exists in both lowercase and uppercase.** If it does, we compare it with the current largest character and update it if it's larger or if it's the first character found.
 
-This way we only iterate through the string twice. The time complexity is `O(n)` aka linear time. The complexity of the solution grows linearly with the size of the input.
+**This way we only iterate through the string twice.** The time complexity is `O(n)` aka linear time. The complexity of the solution grows linearly with the size of the input.
 
 ```javascript
 function solution(str: string) {

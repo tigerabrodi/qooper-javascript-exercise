@@ -25,6 +25,10 @@ Constraints:
 - `N` is an integer within the range `[1..200,000]`.
 - String `S` consists only of letters (`a-z` and/or `A-Z`).
 
+# Tests
+
+I took the TDD approach and started out by writing failing tests taken from the examples mentioned in the challenge.
+
 # Naive Solution
 
 The first immediate solution that comes to my mind is naive and inefficient. It's to iterate through the string and for each character, iterate through the string again to check if the character exists in both lowercase and uppercase. If it does, we compare it with the current largest character and update it if it's larger or if it's the first character found.

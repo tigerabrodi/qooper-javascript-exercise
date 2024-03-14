@@ -24,3 +24,46 @@ Constraints:
 
 - `N` is an integer within the range `[1..200,000]`.
 - String `S` consists only of letters (`a-z` and/or `A-Z`).
+
+# Naive Solution
+
+The first immediate solution that comes to my mind is naive and inefficient. It's to iterate through the string and for each character, iterate through the string again to check if the character exists in both lowercase and uppercase. If it does, we compare it with the current largest character and update it if it's larger or if it's the first character found.
+
+It's inefficient because the time complexity is `O(n^2)` aka quadratic time. The complexity of the solution grows quadratically with the size of the input.
+
+```javascript
+function solution(str: string) {
+  let largestCharacter = 'NO'
+
+  for (
+    let currentCharIndex = 0;
+    currentCharIndex < str.length;
+    currentCharIndex++
+  ) {
+    const char = str[currentCharIndex]
+    let isLowerCaseFound = false
+    let isUpperCaseFound = false
+
+    for (
+      let charToMatchIndex = 0;
+      charToMatchIndex < str.length;
+      charToMatchIndex++
+    ) {
+      if (str[charToMatchIndex] === char.toLowerCase()) {
+        isLowerCaseFound = true
+      }
+
+      if (str[charToMatchIndex] === char.toUpperCase()) {
+        isUpperCaseFound = true
+      }
+    }
+
+    if (isLowerCaseFound && isUpperCaseFound) {
+      if (largestCharacter === 'NO' || char.toUpperCase() > largestCharacter) {
+        largestCharacter = char.toUpperCase()
+      }
+    }
+  }
+  return largestCharacter
+}
+```

@@ -35,25 +35,16 @@ It's inefficient because the time complexity is `O(n^2)` aka quadratic time. The
 function solution(str: string) {
   let largestCharacter = 'NO'
 
-  for (
-    let currentCharIndex = 0;
-    currentCharIndex < str.length;
-    currentCharIndex++
-  ) {
-    const char = str[currentCharIndex]
+  for (const char of str) {
     let isLowerCaseFound = false
     let isUpperCaseFound = false
 
-    for (
-      let charToMatchIndex = 0;
-      charToMatchIndex < str.length;
-      charToMatchIndex++
-    ) {
-      if (str[charToMatchIndex] === char.toLowerCase()) {
+    for (const matchChar of str) {
+      if (matchChar === char.toLowerCase()) {
         isLowerCaseFound = true
       }
 
-      if (str[charToMatchIndex] === char.toUpperCase()) {
+      if (matchChar === char.toUpperCase()) {
         isUpperCaseFound = true
       }
     }
@@ -95,3 +86,39 @@ console.log('app' > 'appp') // false
 Uppercase and lowercase characters have different Unicode values. Therefore, it's important to be aware of this when comparing characters.
 
 For instance, "a" is considered greater than "A" because the lowercase character has a greater index in the internal encoding table JavaScript uses (Unicode).
+
+# Efficient Solution
+
+The efficient solution is to use a Set.
+
+A Set is a collection of unique values where the lookup of a value is `O(1)` aka constant time. Looking up a value in a Set is very fast and won't affect the runtime complexity of the solution no matter how large the Set is.
+
+We can use a Set to store all the unique characters in the string. Then, we can iterate through the string again and check if the character exists in both lowercase and uppercase. If it does, we compare it with the current largest character and update it if it's larger or if it's the first character found.
+
+This way we only iterate through the string twice. The time complexity is `O(n)` aka linear time. The complexity of the solution grows linearly with the size of the input.
+
+```javascript
+function solution(str: string) {
+  let largestCharacter = 'NO'
+  const uniqueCharsOfString = new Set()
+
+  for (const char of str) {
+    uniqueCharsOfString.add(char)
+  }
+
+  for (const char of str) {
+    if (
+      uniqueCharsOfString.has(char.toLowerCase()) &&
+      uniqueCharsOfString.has(char.toUpperCase())
+    ) {
+      const upperChar = char.toUpperCase()
+
+      if (largestCharacter === 'NO' || upperChar > largestCharacter) {
+        largestCharacter = upperChar
+      }
+    }
+  }
+
+  return largestCharacter
+}
+```

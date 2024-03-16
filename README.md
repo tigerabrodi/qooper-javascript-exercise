@@ -25,9 +25,32 @@ Constraints:
 - `N` is an integer within the range `[1..200,000]`.
 - String `S` consists only of letters (`a-z` and/or `A-Z`).
 
+# Run it locally
+
+Start by cloning or forking the repository.
+
+Then, install the dependencies via `npm run install`.
+
+Finally, run the tests via `npm run test`.
+
 # Tests
 
 I took the TDD approach and started out by writing failing tests taken from the examples mentioned in the challenge.
+
+# Thought Process
+
+Reading the problem, three main things that stand out:
+
+- We need to find the alphabetically largest letter that occurs in both lowercase and uppercase in the string.
+- The letters could appear in any order in the string.
+- The letters could be repeated in either case. However, we're only interested in letters occuring once in both cases (uppercase and lowercase).
+
+Knowing this, two solutions that come to mind:
+
+- A naive one where we use a nested loop.
+- An efficient one where we use a Set.
+
+Knowing that we only need to find each letter ONCE in both cases, a Set is perfect for this, uniquely keeping track of each letter.
 
 # Naive Solution
 
@@ -126,3 +149,9 @@ function solution(str: string) {
   return largestCharacter
 }
 ```
+
+# The delusion of `includes`
+
+One might think `includes` could be used to check if a character exists in both cases. However, `includes` can quickly become inefficient because at worst, it needs to go through the entire string. Logically, the only way we can know if a character is in a string is to go through the entire string and check each character.
+
+`includes` appears to have instant lookup time because it's a built-in method. However, that's not the case.

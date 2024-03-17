@@ -27,7 +27,7 @@ Constraints:
 
 # Run it locally
 
-Start by cloning or forking the repository.
+Start by cloning the repository.
 
 Then, install the dependencies via `npm run install`.
 
